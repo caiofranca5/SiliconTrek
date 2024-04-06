@@ -70,7 +70,7 @@ struct ExploreView: View {
                                     Button(action: {
                                         
                                     }, label: {
-                                        CategoryIconView(title: category.rawValue, icon: category.icon, color: category.tintColor)
+                                        CategoryIconView(category: category)
                                     })
                                 }
                                 
@@ -132,7 +132,7 @@ struct ExploreView: View {
                                 Button(action: {
                                     selectedLandmark = landmark
                                 }, label: {
-                                    LandmarkView(size: geometry.size, landmark: landmark)
+                                    LandmarkCellView(screenSize: geometry.size, landmark: landmark)
                                 })
                             }
                             
@@ -161,112 +161,4 @@ struct ExploreView: View {
 
 #Preview {
     ContentView()
-}
-
-struct CategoryIconView: View {
-    
-    let title: String
-    let icon: String
-    let color: Color
-    
-    var body: some View {
-        VStack(content: {
-            ZStack(content: {
-                RoundedRectangle(cornerRadius: 18)
-                    .foregroundStyle(color)
-                    .frame(width: 60, height: 60)
-                
-                Image(systemName: icon)
-                    .foregroundStyle(.white)
-                    .font(.system(size: 22, weight: .semibold))
-            })
-            
-            Text(title)
-                .font(.system(size: 15, weight: .medium))
-                .foregroundStyle(Color.primary)
-        })
-    }
-}
-
-struct LandmarkView: View {
-    
-    let size: CGSize
-    let landmark: Landmark
-    
-    var body: some View {
-        VStack(spacing: 0, content: {
-            ZStack(alignment: .topLeading, content: {
-                
-                AsyncImage(url: URL(string: "https://imagedelivery.net/4YLjfnQ2tjfhd2rW7LgU6g/\(landmark.image)/resized")) { image in
-                    image.resizable()
-                } placeholder: {
-                    Color.init(uiColor: .systemGray5)
-                        .frame(width: abs(size.width - 32), height: abs(size.width - 32)/1.5)
-                }
-                .scaledToFit()
-                .frame(width: abs(size.width - 32), height: abs(size.width - 32)/1.5)
-                    
-                HStack(content: {
-                    ZStack(content: {
-                        RoundedRectangle(cornerRadius: 10)
-                            .foregroundStyle(landmark.category.tintColor)
-                            .frame(width: 40, height: 40)
-                        
-                        Image(systemName: landmark.category.icon)
-                            .foregroundStyle(.white)
-                            .font(.system(size: 17, weight: .semibold))
-                    })
-                    .padding()
-                    
-                    Spacer()
-                    
-                    Button(action: {}, label: {
-                        ZStack(content: {
-                            RoundedRectangle(cornerRadius: 10)
-                                .foregroundStyle(Color.black.opacity(0.6))
-                                .frame(width: 40, height: 40)
-                            
-                            Image(systemName: "bookmark")
-                                .foregroundStyle(.white)
-                                .font(.system(size: 17, weight: .semibold))
-                        })
-                    })
-                    .padding()
-                    
-                })
-                .frame(width: abs(size.width - 32))
-                
-                
-            })
-            
-            VStack(spacing: 0, content: {
-                Text(landmark.name)
-                    .foregroundStyle(Color.primary)
-                    .font(.system(size: 17, weight: .semibold))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .lineLimit(2)
-                    .padding(.horizontal)
-                    .padding(.top)
-                    .padding(.bottom, 8)
-                
-                HStack(spacing: 8, content: {
-                    Image("place.fill")
-                        .font(.system(size: 17, weight: .regular))
-                        .foregroundStyle(Color.accentColor)
-                    
-                    Text(landmark.city.rawValue)
-                        .font(.system(size: 17, weight: .regular))
-                        .foregroundStyle(Color.secondary)
-                })
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal)
-                
-                Spacer()
-            })
-            .frame(width: abs(size.width - 32), height: 88)
-            .background(Color.init(uiColor: .systemBackground))
-        })
-        .clipShape(RoundedRectangle(cornerRadius: 18))
-        .shadow(radius: 2)
-    }
 }
