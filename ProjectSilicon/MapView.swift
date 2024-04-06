@@ -35,8 +35,8 @@ struct MapView: View {
     var body: some View {
         Map(position: $initialMapPosition, interactionModes: .all) {
             ForEach(loadLandmarks(), id: \.name) { landmark in
-                Marker(landmark.name, systemImage: landmark.icon, coordinate: landmark.coordinate)
-                    .tint(landmark.tintColor)
+                Marker(landmark.name, systemImage: landmark.category.icon, coordinate: landmark.coordinate)
+                    .tint(landmark.category.tintColor)
                 
                 
 //                Annotation("", coordinate: landmark.coordinate) {
