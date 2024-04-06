@@ -11,7 +11,26 @@ import SwiftUI
 struct ProjectSiliconApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+           ContentView()
         }
     }
+}
+
+struct ContentView: View {
+    var body: some View {
+        TabView(content: {
+            ExploreView()
+                .tabItem { Label("Explore", systemImage: "signpost.right.fill") }
+            
+            Text("Favorites")
+                .tabItem { Label("Favorites", systemImage: "bookmark") }
+            
+            Text("You")
+                .tabItem { Label("You", systemImage: "person") }
+        })
+    }
+}
+
+#Preview {
+    ContentView()
 }
