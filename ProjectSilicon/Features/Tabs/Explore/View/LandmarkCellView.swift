@@ -26,16 +26,33 @@ struct LandmarkCellView: View {
                 .frame(width: abs(screenSize.width/1.5), height: abs(screenSize.width/1.5)/1.5)
                     
                     
-                ZStack(content: {
-                    RoundedRectangle(cornerRadius: 10)
-                        .foregroundStyle(landmark.category.tintColor)
-                        .frame(width: 40, height: 40)
+                HStack(content: {
+                    ZStack(content: {
+                        RoundedRectangle(cornerRadius: 10)
+                            .foregroundStyle(landmark.category.tintColor)
+                            .frame(width: 40, height: 40)
+                        
+                        Image(systemName: landmark.category.icon)
+                            .foregroundStyle(.white)
+                            .font(.system(size: 17, weight: .semibold))
+                    })
                     
-                    Image(systemName: landmark.category.icon)
-                        .foregroundStyle(.white)
-                        .font(.system(size: 17, weight: .semibold))
+                    Spacer()
+                    
+                    Button(action: {}, label: {
+                        ZStack(content: {
+                            RoundedRectangle(cornerRadius: 10)
+                                .foregroundStyle(Color.primary.opacity(0.6))
+                                .frame(width: 40, height: 40)
+                            
+                            Image(systemName: "bookmark")
+                                .foregroundStyle(.white)
+                                .font(.system(size: 17, weight: .semibold))
+                        })
+                    })
                 })
                 .padding()
+                .frame(width: abs(screenSize.width/1.5))
                 
                 
             })
