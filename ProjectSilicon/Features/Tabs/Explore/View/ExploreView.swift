@@ -80,42 +80,13 @@ struct ExploreView: View {
                         })
                         .padding(.bottom, 32)
                         
-                        VStack(spacing: 32, content: {
+                        VStack(spacing: 0, content: {
                             
                             HStack(content: {
-                                Text("Landmarks")
+                                Text("Top Rated")
                                     .font(.system(size: 20, weight: .semibold))
                                 
                                 Spacer()
-                                
-//                                Menu(content: {
-//                                    ForEach(LandmarkCity.allCases) { city in
-//                                        Button(action: {
-//                                            self.selectedCity = city
-//                                        }) {
-//                                            if self.selectedCity == city {
-//                                                Label(city.rawValue, systemImage: "checkmark")
-//                                            } else {
-//                                                Label(city.rawValue, systemImage: "checkmark")
-//                                                    .labelStyle(.titleOnly)
-//                                            }
-//                                        }
-//                                    }
-//                                }, label: {
-//                                    HStack(alignment: .center, content: {
-//                                        Text("See All")
-//                                            .font(.system(size: 17, weight: .medium))
-//                                            .foregroundStyle(Color.primary)
-//                                        
-//                                        Image(systemName: "chevron.right")
-//                                            .font(.system(size: 15, weight: .semibold))
-//                                            .foregroundStyle(Color.accentColor)
-//                                    })
-//                                    .padding(.horizontal, 16)
-//                                    .padding(.vertical, 8)
-//                                    .background(Color.init(uiColor: .systemBackground))
-//                                    .clipShape(Capsule())
-//                                })
                                 
                                 Button(action: {
                                     print("Oi")
@@ -124,26 +95,33 @@ struct ExploreView: View {
                                 })
                                 
                             })
-                            .padding(.top, 32)
+                            .padding(.top, 24)
+                            .padding(.bottom, 22)
                             .padding(.horizontal, 16)
                             
-                            ForEach(loadLandmarks(), id: \.self) { landmark in
-
-                                Button(action: {
-                                    selectedLandmark = landmark
-                                }, label: {
-                                    LandmarkCellView(screenSize: geometry.size, landmark: landmark)
+                            ScrollView(.horizontal, showsIndicators: false, content: {
+                                HStack(spacing: 24, content: {
+                                    ForEach(loadLandmarks(), id: \.self) { landmark in
+                                        Button(action: {
+                                            selectedLandmark = landmark
+                                        }, label: {
+                                            LandmarkCellView(screenSize: geometry.size, landmark: landmark)
+                                        })
+                                        .padding(.vertical,2)
+                                    }
+                                    
+                                    Spacer().frame(width: 24)
                                 })
-                            }
-                            
-                            Spacer().frame(height: 0)
+                                .offset(x: 24)
+                            })
+                            .padding(.bottom, 22)
                             
                         })
                         .background(Color.init(uiColor: .systemGray6))
                         .clipShape(RoundedRectangle(cornerRadius: 20))
                         
                     })
-                    .padding(.top, 16)
+                    .padding(.top, 24)
                     .navigationTitle("Explore")
                     .navigationBarTitleDisplayMode(.large)
                 })
@@ -162,3 +140,34 @@ struct ExploreView: View {
 #Preview {
     ContentView()
 }
+
+
+
+//Menu(content: {
+//    ForEach(LandmarkCity.allCases) { city in
+//        Button(action: {
+//            self.selectedCity = city
+//        }) {
+//            if self.selectedCity == city {
+//                Label(city.rawValue, systemImage: "checkmark")
+//            } else {
+//                Label(city.rawValue, systemImage: "checkmark")
+//                    .labelStyle(.titleOnly)
+//            }
+//        }
+//    }
+//}, label: {
+//    HStack(alignment: .center, content: {
+//        Text("See All")
+//            .font(.system(size: 17, weight: .medium))
+//            .foregroundStyle(Color.primary)
+//        
+//        Image(systemName: "chevron.right")
+//            .font(.system(size: 15, weight: .semibold))
+//            .foregroundStyle(Color.accentColor)
+//    })
+//    .padding(.horizontal, 16)
+//    .padding(.vertical, 8)
+//    .background(Color.init(uiColor: .systemBackground))
+//    .clipShape(Capsule())
+//})
