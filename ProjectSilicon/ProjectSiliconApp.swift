@@ -20,7 +20,7 @@ struct ContentView: View {
     var body: some View {
         TabView(content: {
             ExploreView()
-                .tabItem { Label("Explore", systemImage: "signpost.right.fill") }
+                .tabItem { Label("Explore", systemImage: "magnifyingglass") }
             
             Text("Favorites")
                 .tabItem { Label("Favorites", systemImage: "bookmark") }

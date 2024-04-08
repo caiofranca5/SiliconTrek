@@ -1,14 +1,14 @@
 [
     {
-        "id": 18,
-        "name": "Meta Headquarters",
-        "category": "Tech",
-        "image": "60911fb5-c706-4e58-a509-3a34c49c3f00",
+        "id": 3,
+        "name": "Stanford University",
+        "category": "Edu",
+        "image": "0fa2e1ed-392c-4e92-ea50-c88460fe9400",
         "source": "Adobe",
-        "city": "Menlo Park",
-        "address": "1 Hacker Way",
-        "latitude": 37.484928,
-        "longitude": -122.148201
+        "city": "Palo Alto",
+        "address": "450 Jane Stanford Way",
+        "latitude": 37.42859,
+        "longitude": -122.17077
     },
     {
         "id": 19,
@@ -44,17 +44,6 @@
         "longitude": -122.084256
     },
     {
-        "id": 22,
-        "name": "Google Bay View",
-        "category": "Tech",
-        "image": "c0e683e0-0b9a-4cee-39ad-5299ffe69500",
-        "source": "iStock",
-        "city": "Mountain View",
-        "address": "100 Bay Vw Dr",
-        "latitude": 37.6381,
-        "longitude": -122.04467
-    },
-    {
         "id": 17,
         "name": "Levi's Stadium",
         "category": "Sports",
@@ -64,6 +53,17 @@
         "address": "4900 Marie P DeBartolo Way",
         "latitude": 37.403158,
         "longitude": -121.969831
+    },
+    {
+        "id": 22,
+        "name": "Google Bay View",
+        "category": "Tech",
+        "image": "c0e683e0-0b9a-4cee-39ad-5299ffe69500",
+        "source": "iStock",
+        "city": "Mountain View",
+        "address": "100 Bay Vw Dr",
+        "latitude": 37.6381,
+        "longitude": -122.04467
     },
     {
         "id": 16,
@@ -198,17 +198,6 @@
         "longitude": -121.963779
     },
     {
-        "id": 3,
-        "name": "Stanford University",
-        "category": "Edu",
-        "image": "0fa2e1ed-392c-4e92-ea50-c88460fe9400",
-        "source": "Adobe",
-        "city": "Palo Alto",
-        "address": "450 Jane Stanford Way",
-        "latitude": 37.42859,
-        "longitude": -122.17077
-    },
-    {
         "id": 4,
         "name": "Santa Clara University",
         "category": "Edu",
@@ -229,6 +218,17 @@
         "address": "19401 Stevens Creek Blvd",
         "latitude": 37.32308,
         "longitude": -122.01021
+    },
+    {
+        "id": 18,
+        "name": "Meta Headquarters",
+        "category": "Tech",
+        "image": "60911fb5-c706-4e58-a509-3a34c49c3f00",
+        "source": "Adobe",
+        "city": "Menlo Park",
+        "address": "1 Hacker Way",
+        "latitude": 37.484928,
+        "longitude": -122.148201
     },
     {
         "id": 2,

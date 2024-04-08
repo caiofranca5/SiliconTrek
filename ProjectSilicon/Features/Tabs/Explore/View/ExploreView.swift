@@ -9,89 +9,31 @@ import SwiftUI
 
 struct ExploreView: View {
     
-    @State var searchText = ""
-    @State private var selectedCity: LandmarkCity = .all
-    let homeCategories: [LandmarkCategory] = [.tech, .nature, .history, .education, .sports, .shopping, .dining, .recreation]
-    @State private var selectedLandmark: Landmark?
-
-    // Assuming you have the Landmark struct and related enums as previously discussed
-
-    func loadLandmarks() -> [Landmark] {
-        // Find the URL for the landmarks.json file in the main bundle
-        guard let url = Bundle.main.url(forResource: "landmarks", withExtension: "json") else {
-            fatalError("Failed to find landmarks.json in the bundle1.")
-        }
-
-        // Attempt to load the file into a Data object
-        guard let data = try? Data(contentsOf: url) else {
-            fatalError("Failed to load landmarks.json from the bundle.2")
-        }
-
-        // Attempt to decode the JSON into an array of Landmark objects
-        let decoder = JSONDecoder()
-        guard let landmarks = try? decoder.decode([Landmark].self, from: data) else {
-            fatalError("Failed to decode landmarks.json from the bundle.3")
-        }
-
-        return landmarks
-    }
+    @StateObject var viewModel = ExploreViewModel()
 
     var body: some View {
         NavigationStack(root: {
             GeometryReader(content: { geometry in
                 ScrollView(content: {
                     VStack(spacing: 0, content: {
-                        HStack(spacing: 8, content: {
-                            Image(systemName: "magnifyingglass")
-                                .font(.system(size: 17, weight: .regular))
-                                .foregroundColor(.secondary.opacity(0.5))
-                                .padding(.leading, 8)
-                            
-                            TextField("Pesquisar", text: $searchText)
-                                .background(Color.init(uiColor: .systemGray6))
-                                .font(.system(size: 17, weight: .regular))
-                                .frame(height: 38)
-                            
-                            Image(systemName: "slider.horizontal.3")
-                                .font(.system(size: 20, weight: .regular))
-                                .foregroundColor(Color.accentColor)
-                                .padding(.trailing, 8)
-                            
-                        })
-                        .padding(8)
-                        .background(Color.init(uiColor: .systemGray6))
-                        .clipShape(Capsule())
+                        ExploreSearchBarView(searchText: $viewModel.searchText)
                         .padding(.bottom, 32)
                         .padding(.horizontal, 16)
                         
-                        ScrollView(.horizontal, showsIndicators: false, content: {
-                            HStack(spacing: 24, content: {
-                                ForEach(homeCategories, id: \.self) { category in
-                                    Button(action: {
-                                        
-                                    }, label: {
-                                        CategoryIconView(category: category)
-                                    })
-                                }
-                                
-                                Spacer().frame(width: 24)
-                            })
-                            .offset(x: 24)
-                        })
-                        .padding(.bottom, 32)
+                        ExploreCategoriesView(categories: viewModel.homeCategories)
+                            .padding(.bottom, 32)
                         
                         VStack(spacing: 0, content: {
                             
                             HStack(content: {
-                                Text("Top Rated")
+                                Text("Editors' Choice")
                                     .font(.system(size: 20, weight: .semibold))
                                 
                                 Spacer()
                                 
-                                Button(action: {
-                                    print("Oi")
-                                }, label: {
+                                Button(action: {}, label: {
                                     Text("See All")
+                                        .font(.system(size: 17, weight: .medium))
                                 })
                                 
                             })
@@ -99,22 +41,39 @@ struct ExploreView: View {
                             .padding(.bottom, 22)
                             .padding(.horizontal, 16)
                             
-                            ScrollView(.horizontal, showsIndicators: false, content: {
-                                HStack(spacing: 24, content: {
-                                    ForEach(loadLandmarks(), id: \.self) { landmark in
-                                        Button(action: {
-                                            selectedLandmark = landmark
-                                        }, label: {
-                                            LandmarkCellView(screenSize: geometry.size, landmark: landmark)
-                                        })
-                                        .padding(.vertical,2)
-                                    }
-                                    
-                                    Spacer().frame(width: 24)
+                            ExploreCarouselView(landmarks: viewModel.loadLandmarks(), selectedLandmark: $viewModel.selectedLandmark)
+                                .padding(.bottom, 22)
+                            
+                            Divider()
+                                .padding(.horizontal, 16)
+                                .padding(.bottom, 24)
+                            
+                            HStack(content: {
+                                Text("Top Rated")
+                                    .font(.system(size: 20, weight: .semibold))
+                                
+                                Spacer()
+                                
+                                Button(action: {}, label: {
+                                    Text("See All")
+                                        .font(.system(size: 17, weight: .medium))
                                 })
-                                .offset(x: 24)
+                                
                             })
-                            .padding(.bottom, 22)
+                            .padding(.horizontal, 16)
+                            .padding(.bottom, 24)
+                            
+                            VStack(spacing: 24, content: {
+                                ForEach(viewModel.loadLandmarks().prefix(2), id: \.self) { landmark in
+                                    Button(action: {
+                                        viewModel.selectedLandmark = landmark
+                                    }, label: {
+                                        LandmarkCellView(screenSize: geometry.size, landmark: landmark)
+                                    })
+                                }
+                                
+                                Divider().opacity(0)
+                            })
                             
                         })
                         .background(Color.init(uiColor: .systemGray6))
@@ -127,7 +86,7 @@ struct ExploreView: View {
                 })
             })
         })
-        .sheet(item: $selectedLandmark) { selected in
+        .sheet(item: $viewModel.selectedLandmark) { selected in
             LandmarkDetailView(landmark: selected)
                 .presentationDetents([.large])
                 .presentationDragIndicator(.hidden)
