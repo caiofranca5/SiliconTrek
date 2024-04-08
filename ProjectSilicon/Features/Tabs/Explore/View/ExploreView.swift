@@ -16,21 +16,7 @@ struct ExploreView: View {
             GeometryReader(content: { geometry in
                 ScrollView(content: {
                     VStack(spacing: 0, content: {
-                        HStack(spacing: 8, content: {
-                            Image(systemName: "magnifyingglass")
-                                .font(.system(size: 17, weight: .regular))
-                                .foregroundColor(.secondary.opacity(0.5))
-                                .padding(.leading, 8)
-                            
-                            TextField("Search", text: $viewModel.searchText)
-                                .background(Color.init(uiColor: .systemGray6))
-                                .font(.system(size: 17, weight: .regular))
-                                .frame(height: 38)
-                            
-                        })
-                        .padding(8)
-                        .background(Color.init(uiColor: .systemGray6))
-                        .clipShape(Capsule())
+                        ExploreSearchBarView(searchText: $viewModel.searchText)
                         .padding(.bottom, 32)
                         .padding(.horizontal, 16)
                         
