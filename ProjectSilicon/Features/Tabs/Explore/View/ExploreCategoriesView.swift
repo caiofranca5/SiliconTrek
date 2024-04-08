@@ -1,5 +1,5 @@
 //
-//  CategoryIconView.swift
+//  ExploreCategoriesView.swift
 //  ProjectSilicon
 //
 //  Created by Caio França on 06/04/24.
@@ -7,7 +7,28 @@
 
 import SwiftUI
 
-struct CategoryIconView: View {
+struct ExploreCategoriesView: View {
+    let categories: [LandmarkCategory]
+    
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false, content: {
+            HStack(spacing: 24, content: {
+                ForEach(categories, id: \.self) { category in
+                    Button(action: {
+                        
+                    }, label: {
+                        CategoryIconView(category: category)
+                    })
+                }
+                
+                Spacer().frame(width: 24)
+            })
+            .offset(x: 24)
+        })
+    }
+}
+
+fileprivate struct CategoryIconView: View {
     
     let category: LandmarkCategory
     
