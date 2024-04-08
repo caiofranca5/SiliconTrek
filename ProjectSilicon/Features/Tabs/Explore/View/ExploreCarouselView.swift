@@ -34,6 +34,8 @@ fileprivate struct CarouselCell: View {
     
     let screenSize: CGSize
     let landmark: Landmark
+    let imageProportion = 1.5
+    @State var isBookmarked = false
     
     var body: some View {
         VStack(spacing: 0, content: {
@@ -43,11 +45,10 @@ fileprivate struct CarouselCell: View {
                     image.resizable()
                 } placeholder: {
                     Color.init(uiColor: .systemGray5)
-                        .frame(width: abs(screenSize.width/1.5), height: abs(screenSize.width/1.5)/1.5)
+                        .frame(width: abs(screenSize.width/imageProportion), height: abs(screenSize.width/imageProportion)/1.5)
                 }
                 .scaledToFit()
-                .frame(width: abs(screenSize.width/1.5), height: abs(screenSize.width/1.5)/1.5)
-                    
+                .frame(width: abs(screenSize.width/imageProportion), height: abs(screenSize.width/imageProportion)/1.5)
                     
                 HStack(content: {
                     ZStack(content: {
@@ -62,21 +63,20 @@ fileprivate struct CarouselCell: View {
                     
                     Spacer()
                     
-                    Button(action: {}, label: {
+                    Button(action: {isBookmarked.toggle()}, label: {
                         ZStack(content: {
                             RoundedRectangle(cornerRadius: 10)
                                 .foregroundStyle(Color.primary.opacity(0.6))
                                 .frame(width: 40, height: 40)
                             
-                            Image(systemName: "bookmark")
-                                .foregroundStyle(.white)
+                            Image(systemName: isBookmarked ? "bookmark.fill" : "bookmark")
+                                .foregroundStyle(Color.white)
                                 .font(.system(size: 17, weight: .semibold))
                         })
                     })
                 })
                 .padding()
-                .frame(width: abs(screenSize.width/1.5))
-                
+                .frame(width: abs(screenSize.width/imageProportion))
                 
             })
             
@@ -99,7 +99,7 @@ fileprivate struct CarouselCell: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             })
             .padding()
-            .frame(width: abs(screenSize.width/1.5), height: 80)
+            .frame(width: abs(screenSize.width/imageProportion), height: 80)
             .background(Color.init(uiColor: .systemBackground))
         })
         .clipShape(RoundedRectangle(cornerRadius: 18))
@@ -108,6 +108,6 @@ fileprivate struct CarouselCell: View {
 }
 
 
-//#Preview {
-//    ExploreCarouselView()
-//}
+#Preview {
+    ExploreView()
+}
