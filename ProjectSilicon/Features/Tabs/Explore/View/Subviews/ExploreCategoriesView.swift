@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ExploreCategoriesView: View {
+    @ObservedObject var viewModel: ExploreViewModel
     let categories: [LandmarkCategory]
     
     var body: some View {
@@ -15,7 +16,8 @@ struct ExploreCategoriesView: View {
             HStack(spacing: 24, content: {
                 ForEach(categories, id: \.self) { category in
                     Button(action: {
-                        
+                        viewModel.navigateToSearch(type: .category)
+                        viewModel.categoryFilter = category
                     }, label: {
                         CategoryIconView(category: category)
                     })

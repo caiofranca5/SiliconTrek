@@ -5,11 +5,14 @@
 //  Created by Caio França on 07/04/24.
 //
 
-import Foundation
+import SwiftUI
 
 class ExploreViewModel: ObservableObject {
+    
+    @Published var path = NavigationPath()
     @Published var searchText = ""
-    @Published var selectedCity: LandmarkCity = .all
+    @Published var categoryFilter: LandmarkCategory = .dining
+    @Published var cityFilter: LandmarkCity = .all
     @Published var selectedLandmark: Landmark?
     @Published var errorMessage: String?
     
@@ -30,4 +33,9 @@ class ExploreViewModel: ObservableObject {
             return []
         }
     }
+    
+    func navigateToSearch(type: SearchType) {
+        path.append(type)
+    }
+    
 }

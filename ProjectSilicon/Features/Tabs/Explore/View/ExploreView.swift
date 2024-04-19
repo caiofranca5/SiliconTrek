@@ -12,27 +12,31 @@ struct ExploreView: View {
     @StateObject var viewModel = ExploreViewModel()
 
     var body: some View {
-        NavigationStack(root: {
+        NavigationStack(path: $viewModel.path, root: {
             GeometryReader(content: { geometry in
                 ScrollView(content: {
                     VStack(spacing: 0, content: {
-                        ExploreSearchBarView(searchText: $viewModel.searchText)
+                        ExploreSearchBarView(viewModel: viewModel)
                         .padding(.bottom, 32)
                         .padding(.horizontal, 16)
                         
-                        ExploreCategoriesView(categories: viewModel.homeCategories)
+                        ExploreCategoriesView(viewModel: viewModel, categories: viewModel.homeCategories)
                             .padding(.bottom, 32)
                         
                         VStack(spacing: 0, content: {
                             
                             HStack(content: {
                                 Text("Editors' Choice")
+                                    .foregroundStyle(Color.primary)
                                     .font(.system(size: 20, weight: .semibold))
                                 
                                 Spacer()
                                 
-                                Button(action: {}, label: {
+                                Button(action: {
+                                    viewModel.navigateToSearch(type: .all)
+                                }, label: {
                                     Text("See All")
+                                        .foregroundStyle(Color.accentColor)
                                         .font(.system(size: 17, weight: .medium))
                                 })
                                 
@@ -50,11 +54,14 @@ struct ExploreView: View {
                             
                             HStack(content: {
                                 Text("Top Rated")
+                                    .foregroundStyle(Color.primary)
                                     .font(.system(size: 20, weight: .semibold))
                                 
                                 Spacer()
                                 
-                                Button(action: {}, label: {
+                                Button(action: {
+                                    viewModel.navigateToSearch(type: .all)
+                                }, label: {
                                     Text("See All")
                                         .font(.system(size: 17, weight: .medium))
                                 })
@@ -68,7 +75,7 @@ struct ExploreView: View {
                                     Button(action: {
                                         viewModel.selectedLandmark = landmark
                                     }, label: {
-                                        LandmarkCellView(screenSize: geometry.size, landmark: landmark)
+                                        LandmarkListCellView(screenSize: geometry.size, landmark: landmark)
                                     })
                                 }
                                 
@@ -83,6 +90,12 @@ struct ExploreView: View {
                     .padding(.top, 24)
                     .navigationTitle("Explore")
                     .navigationBarTitleDisplayMode(.large)
+                    .navigationDestination(for: SearchType.self) { destination in
+                        SearchView(exploreViewModel: viewModel, type: destination)
+                    }
+                    .onAppear {
+                        viewModel.searchText = ""
+                    }
                 })
             })
         })
@@ -99,34 +112,3 @@ struct ExploreView: View {
 #Preview {
     ContentView()
 }
-
-
-
-//Menu(content: {
-//    ForEach(LandmarkCity.allCases) { city in
-//        Button(action: {
-//            self.selectedCity = city
-//        }) {
-//            if self.selectedCity == city {
-//                Label(city.rawValue, systemImage: "checkmark")
-//            } else {
-//                Label(city.rawValue, systemImage: "checkmark")
-//                    .labelStyle(.titleOnly)
-//            }
-//        }
-//    }
-//}, label: {
-//    HStack(alignment: .center, content: {
-//        Text("See All")
-//            .font(.system(size: 17, weight: .medium))
-//            .foregroundStyle(Color.primary)
-//        
-//        Image(systemName: "chevron.right")
-//            .font(.system(size: 15, weight: .semibold))
-//            .foregroundStyle(Color.accentColor)
-//    })
-//    .padding(.horizontal, 16)
-//    .padding(.vertical, 8)
-//    .background(Color.init(uiColor: .systemBackground))
-//    .clipShape(Capsule())
-//})
