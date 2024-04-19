@@ -31,7 +31,7 @@ struct SearchView: View {
                             Button(action: {
                                 exploreViewModel.selectedLandmark = landmark
                             }, label: {
-                                LandmarkCellView(screenSize: geometry.size, landmark: landmark)
+                                LandmarkListCellView(screenSize: geometry.size, landmark: landmark)
                             })
                         }
                         
@@ -40,18 +40,16 @@ struct SearchView: View {
                     .padding(.top, 24)
                     .background(Color.init(uiColor: .systemGray6))
                 })
-                //.navigationTitle("'\(exploreViewModel.searchText)'")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
-                        Picker("Please choose a color", selection: $exploreViewModel.selectedCity) {
+                        Picker("All Cities", selection: $exploreViewModel.cityFilter) {
                             ForEach(LandmarkCity.allCases, id: \.self) {
                                 Text($0.rawValue)
                             }
                         }
                     }
                 }
-                //.navigationBarBackButtonHidden()
             })
         })
     }

@@ -75,7 +75,7 @@ struct ExploreView: View {
                                     Button(action: {
                                         viewModel.selectedLandmark = landmark
                                     }, label: {
-                                        LandmarkCellView(screenSize: geometry.size, landmark: landmark)
+                                        LandmarkListCellView(screenSize: geometry.size, landmark: landmark)
                                     })
                                 }
                                 

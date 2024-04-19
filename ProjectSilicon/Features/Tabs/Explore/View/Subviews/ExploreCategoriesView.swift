@@ -17,7 +17,7 @@ struct ExploreCategoriesView: View {
                 ForEach(categories, id: \.self) { category in
                     Button(action: {
                         viewModel.navigateToSearch(type: .category)
-                        viewModel.searchCategory = category
+                        viewModel.categoryFilter = category
                     }, label: {
                         CategoryIconView(category: category)
                     })
