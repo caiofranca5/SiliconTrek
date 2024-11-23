@@ -25,7 +25,7 @@ struct ExploreCategoriesView: View {
                 
                 Spacer().frame(width: 24)
             })
-            .offset(x: 24)
+            .offset(x: 16)
         })
     }
 }
@@ -37,7 +37,7 @@ fileprivate struct CategoryIconView: View {
     var body: some View {
         VStack(content: {
             ZStack(content: {
-                RoundedRectangle(cornerRadius: 18)
+                RoundedRectangle(cornerRadius: 14)
                     .foregroundStyle(category.tintColor)
                     .frame(width: 60, height: 60)
                 
