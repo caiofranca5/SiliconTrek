@@ -61,9 +61,9 @@ struct LandmarkDetailView: View {
                         
                     }, label: {
                         Label("Start Navigation", systemImage: "location.fill")
-                            .font(.system(size: 19, weight: .semibold))
+                            .font(.system(size: 17, weight: .semibold))
                             .frame(maxWidth: .infinity, alignment: .center)
-                            .padding(.vertical, 6)
+                            .padding(.vertical, 4)
                     })
                     .buttonStyle(.borderedProminent)
                     .clipShape(RoundedRectangle(cornerRadius: 12))
@@ -104,12 +104,12 @@ struct LandmarkDetailView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal, 16)
                     
-                    Map(position: $cameraPosition) {
-                        Marker(landmark.name, coordinate: CLLocationCoordinate2D(latitude: landmark.latitude, longitude: landmark.longitude))
-                    }
-                    .frame(width: abs(geometry.size.width - 32), height: abs(geometry.size.width - 32)/2)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-                    .padding(.vertical, 16)
+//                    Map(position: $cameraPosition) {
+//                        Marker(landmark.name, coordinate: CLLocationCoordinate2D(latitude: landmark.latitude, longitude: landmark.longitude))
+//                    }
+//                    .frame(width: abs(geometry.size.width - 32), height: abs(geometry.size.width - 32)/2)
+//                    .clipShape(RoundedRectangle(cornerRadius: 10))
+//                    .padding(.vertical, 16)
                     
                 })
             })
@@ -138,16 +138,14 @@ struct LandmarkDetailToolbar: ToolbarContent {
             ///Add to Collection
             Menu {
             } label: {
-                Image(systemName:"folder.fill.badge.plus")
-                    .symbolRenderingMode(.multicolor)
+                Image(systemName:"folder.badge.plus")
+                    //.symbolRenderingMode(.multicolor)
             }
-            .unredacted()
             
             ///Share
             ShareLink(item: URL(string: "https://www.silicontrek.com/\(landmark.id)")!, label: {
                 Image(systemName: "square.and.arrow.up")
             })
-            .unredacted()
         }
         
     }

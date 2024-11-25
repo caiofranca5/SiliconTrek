@@ -16,8 +16,6 @@ struct ExploreCategoriesView: View {
             HStack(spacing: 24, content: {
                 ForEach(categories, id: \.self) { category in
                     Button(action: {
-                        viewModel.navigateToSearch(type: .category)
-                        viewModel.categoryFilter = category
                     }, label: {
                         CategoryIconView(category: category)
                     })

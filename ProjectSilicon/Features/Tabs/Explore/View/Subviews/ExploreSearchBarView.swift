@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ExploreSearchBarView: View {
-    @ObservedObject var viewModel: ExploreViewModel
+    
+    @Binding var searchText: String
     
     var body: some View {
         HStack(spacing: 8, content: {
@@ -17,14 +18,11 @@ struct ExploreSearchBarView: View {
                 .foregroundColor(.secondary.opacity(0.5))
                 .padding(.leading, 8)
             
-            TextField("Search", text: $viewModel.searchText)
+            TextField("Search", text: $searchText)
                 .background(Color.init(uiColor: .systemGray6))
                 .font(.system(size: 17, weight: .regular))
                 .frame(height: 38)
                 .submitLabel(.search)
-                .onSubmit {
-                    viewModel.navigateToSearch(type: .text)
-                }
             
         })
         .padding(8)

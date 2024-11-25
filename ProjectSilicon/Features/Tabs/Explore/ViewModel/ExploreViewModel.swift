@@ -9,11 +9,6 @@ import SwiftUI
 
 class ExploreViewModel: ObservableObject {
     
-    @Published var path = NavigationPath()
-    @Published var searchText = ""
-    @Published var categoryFilter: LandmarkCategory = .dining
-    @Published var cityFilter: LandmarkCity = .all
-    @Published var selectedLandmark: Landmark?
     @Published var errorMessage: String?
     
     let homeCategories: [LandmarkCategory] = [.tech, .nature, .history, .education, .sports, .shopping, .dining, .recreation]
@@ -32,10 +27,6 @@ class ExploreViewModel: ObservableObject {
             self.errorMessage = "Error loading landmarks: \(error.localizedDescription)"
             return []
         }
-    }
-    
-    func navigateToSearch(type: SearchType) {
-        path.append(type)
     }
     
 }

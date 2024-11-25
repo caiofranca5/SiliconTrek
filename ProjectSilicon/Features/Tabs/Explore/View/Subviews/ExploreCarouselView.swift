@@ -8,13 +8,18 @@
 import SwiftUI
 
 struct ExploreCarouselView: View {
+    @Binding var navigationPath: NavigationPath
     let landmarks: [Landmark]
 
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 24) {
                 ForEach(landmarks, id: \.self) { landmark in
-                    CarouselCell(screenSize: UIScreen.main.bounds.size, landmark: landmark)
+                    Button(action: {
+                        navigationPath.append(landmark)
+                    }) {
+                        CarouselCell(screenSize: UIScreen.main.bounds.size, landmark: landmark)
+                    }
                 }
                 Spacer().frame(width: 24)
             }

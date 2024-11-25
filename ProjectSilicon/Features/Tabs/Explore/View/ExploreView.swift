@@ -9,16 +9,18 @@ import SwiftUI
 
 struct ExploreView: View {
     
+    @State private var navigationPath = NavigationPath()
+    @State private var searchText: String = ""
     @StateObject var viewModel = ExploreViewModel()
     
     var body: some View {
-        NavigationStack(root: {
+        NavigationStack(path: $navigationPath, root: {
             GeometryReader(content: { geometry in
                 ScrollView(content: {
                     VStack(spacing: 0, content: {
                         Divider()
                         
-                        ExploreSearchBarView(viewModel: viewModel)
+                        ExploreSearchBarView(searchText: $searchText)
                             .padding(.top, 24)
                             .padding(.bottom, 32)
                             .padding(.horizontal, 16)
@@ -34,7 +36,7 @@ struct ExploreView: View {
                             Spacer()
                             
                             Button(action: {
-                                viewModel.navigateToSearch(type: .all)
+                                //viewModel.navigateToSearch(type: .all)
                             }, label: {
                                 Text("See All")
                                     .foregroundStyle(Color.accentColor)
@@ -46,7 +48,7 @@ struct ExploreView: View {
                         .padding(.bottom, 24)
                         .padding(.horizontal, 16)
                         
-                        ExploreCarouselView(landmarks: viewModel.loadLandmarks())
+                        ExploreCarouselView(navigationPath: $navigationPath, landmarks: viewModel.loadLandmarks())
                         
                         Divider()
                             .padding(.horizontal, 16)
@@ -59,9 +61,7 @@ struct ExploreView: View {
                             
                             Spacer()
                             
-                            Button(action: {
-                                viewModel.navigateToSearch(type: .all)
-                            }, label: {
+                            Button(action: {}, label: {
                                 Text("See All")
                                     .font(.system(size: 17, weight: .medium))
                             })
@@ -73,10 +73,10 @@ struct ExploreView: View {
                         VStack(spacing: 24, content: {
                             ForEach(viewModel.loadLandmarks().prefix(3), id: \.self) { landmark in
                                 Button(action: {
-                                    viewModel.selectedLandmark = landmark
-                                }, label: {
+                                    navigationPath.append(landmark)
+                                }) {
                                     LandmarkListCellView(screenSize: geometry.size, landmark: landmark)
-                                })
+                                }
                             }
                         })
                         
@@ -86,8 +86,8 @@ struct ExploreView: View {
                     })
                     .navigationTitle("Explore")
                     .navigationBarTitleDisplayMode(.large)
-                    .navigationDestination(for: SearchType.self) { destination in
-                        SearchView(exploreViewModel: viewModel, type: destination)
+                    .navigationDestination(for: Landmark.self) { landmark in
+                        LandmarkDetailView(landmark: landmark)
                     }
                 })
             })
