@@ -11,13 +11,15 @@ import MapKit
 struct LandmarkDetailView: View {
     let landmark: Landmark
     @State var isRedacted: Bool = false
+    @ObservedObject var viewModel: ExploreViewModel
     
     @State private var cameraPosition: MapCameraPosition = .region(
         MKCoordinateRegion()
     )
     
-    init(landmark: Landmark) {
+    init(landmark: Landmark, viewModel: ExploreViewModel) {
         self.landmark = landmark
+        self.viewModel = viewModel
         _cameraPosition = State(initialValue: .region(
             MKCoordinateRegion(
                 center: CLLocationCoordinate2D(latitude: landmark.latitude, longitude: landmark.longitude),
@@ -58,7 +60,7 @@ struct LandmarkDetailView: View {
                         .padding(.horizontal, 16)
                     
                     Button(action: {
-                        
+                        viewModel.navigationPath.append(landmark.category)
                     }, label: {
                         Label("Start Navigation", systemImage: "location.fill")
                             .font(.system(size: 17, weight: .semibold))
@@ -117,7 +119,6 @@ struct LandmarkDetailView: View {
             .toolbar(content: {
                 LandmarkDetailToolbar(landmark: landmark)
             })
-//            .tint(.white)
 //            .redacted(reason: isRedacted == false ? .placeholder : [])
         })
     }
@@ -125,7 +126,7 @@ struct LandmarkDetailView: View {
 
 #Preview {
     NavigationStack(root: {
-        LandmarkDetailView(landmark: Landmark(id: 1, name: "Apple Infinite Loop", category: .tech, image: "211d33ce-fd6d-4879-070f-37bf77b9ab00", city: .cupertino, address: "1 Infinite Loop", latitude: 37.331669, longitude: -122.030098))
+        LandmarkDetailView(landmark: Landmark(id: 1, name: "Apple Infinite Loop", category: .tech, image: "211d33ce-fd6d-4879-070f-37bf77b9ab00", city: .cupertino, address: "1 Infinite Loop", latitude: 37.331669, longitude: -122.030098), viewModel: ExploreViewModel())
     })
 }
 

@@ -60,6 +60,7 @@ struct LandmarkListCellView: View {
                     .padding(.leading, 16)
             })
         })
+        .frame(height: abs(screenSize.width/3.35)/1.5)
         .background(Color.init(uiColor: .systemBackground))
         .padding(.horizontal, 16)
     }

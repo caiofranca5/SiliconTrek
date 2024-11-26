@@ -9,12 +9,11 @@ import SwiftUI
 
 struct ExploreView: View {
     
-    @State private var navigationPath = NavigationPath()
     @State private var searchText: String = ""
     @StateObject var viewModel = ExploreViewModel()
     
     var body: some View {
-        NavigationStack(path: $navigationPath, root: {
+        NavigationStack(path: $viewModel.navigationPath, root: {
             GeometryReader(content: { geometry in
                 ScrollView(content: {
                     VStack(spacing: 0, content: {
@@ -48,7 +47,7 @@ struct ExploreView: View {
                         .padding(.bottom, 24)
                         .padding(.horizontal, 16)
                         
-                        ExploreCarouselView(navigationPath: $navigationPath, landmarks: viewModel.loadLandmarks())
+                        ExploreCarouselView(viewModel: viewModel)
                         
                         Divider()
                             .padding(.horizontal, 16)
@@ -71,9 +70,11 @@ struct ExploreView: View {
                         .padding(.bottom, 24)
                         
                         VStack(spacing: 24, content: {
-                            ForEach(viewModel.loadLandmarks().prefix(3), id: \.self) { landmark in
+                            let landmarks = viewModel.landmarks
+                            
+                            ForEach(landmarks, id: \.self) { landmark in
                                 Button(action: {
-                                    navigationPath.append(landmark)
+                                    viewModel.navigationPath.append(landmark)
                                 }) {
                                     LandmarkListCellView(screenSize: geometry.size, landmark: landmark)
                                 }
@@ -87,8 +88,17 @@ struct ExploreView: View {
                     .navigationTitle("Explore")
                     .navigationBarTitleDisplayMode(.large)
                     .navigationDestination(for: Landmark.self) { landmark in
-                        LandmarkDetailView(landmark: landmark)
+                        LandmarkDetailView(landmark: landmark, viewModel: viewModel)
                     }
+                    .navigationDestination(for: LandmarkCategory.self) { category in
+                        LandmarkCategoryWrapper(
+                            content: LandmarkCategoryView(category: category, viewModel: viewModel),
+                            backButtonColor: .white, navbarBackgroundColor: UIColor.init(category.tintColor)
+                        )
+                    }
+                    .onAppear(perform: {
+                        viewModel.loadLandmarks()
+                    })
                 })
             })
         })

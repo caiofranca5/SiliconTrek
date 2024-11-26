@@ -16,6 +16,7 @@ struct ExploreCategoriesView: View {
             HStack(spacing: 24, content: {
                 ForEach(categories, id: \.self) { category in
                     Button(action: {
+                        viewModel.navigationPath.append(category)
                     }, label: {
                         CategoryIconView(category: category)
                     })
