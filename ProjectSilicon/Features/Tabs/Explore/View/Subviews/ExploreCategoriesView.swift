@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ExploreCategoriesView: View {
-    @ObservedObject var viewModel: ExploreViewModel
+    @EnvironmentObject var viewModel: ExploreViewModel
     let categories: [LandmarkCategory]
     
     var body: some View {

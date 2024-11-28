@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct CategoryDetailView: View {
+    @EnvironmentObject var viewModel: ExploreViewModel
     let category: LandmarkCategory
-    @ObservedObject var viewModel: ExploreViewModel
     
     var body: some View {
         GeometryReader(content: { geometry in
@@ -58,7 +58,7 @@ struct CategoryDetailView: View {
 
 #Preview {
     NavigationStack(root: {
-        CategoryDetailView(category: LandmarkCategory.nature, viewModel: ExploreViewModel())
+        CategoryDetailView(category: LandmarkCategory.nature)
     })
 }
 

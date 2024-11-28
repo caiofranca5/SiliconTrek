@@ -10,6 +10,7 @@ import SwiftUI
 class ExploreViewModel: ObservableObject {
     
     @Published var navigationPath = NavigationPath()
+    @Published var searchText: String = ""
     @Published var errorMessage: String?
     @Published var landmarks: [Landmark] = []
     

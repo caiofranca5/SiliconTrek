@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ExploreView: View {
     
-    @State private var searchText: String = ""
     @StateObject var viewModel = ExploreViewModel()
     
     var body: some View {
@@ -19,12 +18,12 @@ struct ExploreView: View {
                     VStack(spacing: 0, content: {
                         Divider()
                         
-                        ExploreSearchBarView(searchText: $searchText)
+                        ExploreSearchBarView()
                             .padding(.top, 24)
                             .padding(.bottom, 32)
                             .padding(.horizontal, 16)
                         
-                        ExploreCategoriesView(viewModel: viewModel, categories: viewModel.homeCategories)
+                        ExploreCategoriesView(categories: viewModel.homeCategories)
                             .padding(.bottom, 32)
                         
                         HStack(content: {
@@ -47,7 +46,7 @@ struct ExploreView: View {
                         .padding(.bottom, 24)
                         .padding(.horizontal, 16)
                         
-                        ExploreCarouselView(viewModel: viewModel)
+                        ExploreCarouselView()
                         
                         Divider()
                             .padding(.horizontal, 16)
@@ -88,11 +87,11 @@ struct ExploreView: View {
                     .navigationTitle("Explore")
                     .navigationBarTitleDisplayMode(.large)
                     .navigationDestination(for: Landmark.self) { landmark in
-                        LandmarkDetailView(landmark: landmark, viewModel: viewModel)
+                        LandmarkDetailView(landmark: landmark)
                     }
                     .navigationDestination(for: LandmarkCategory.self) { category in
                         LandmarkCategoryWrapper(
-                            content: CategoryDetailView(category: category, viewModel: viewModel),
+                            content: CategoryDetailView(category: category),
                             backButtonColor: .white, navbarBackgroundColor: UIColor.init(category.tintColor)
                         )
                     }
@@ -102,6 +101,7 @@ struct ExploreView: View {
                 })
             })
         })
+        .environmentObject(viewModel)
     }
 }
 

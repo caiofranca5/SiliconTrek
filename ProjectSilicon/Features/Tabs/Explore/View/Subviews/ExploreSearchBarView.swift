@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ExploreSearchBarView: View {
     
-    @Binding var searchText: String
+    @EnvironmentObject var viewModel: ExploreViewModel
     
     var body: some View {
         HStack(spacing: 8, content: {
@@ -18,7 +18,7 @@ struct ExploreSearchBarView: View {
                 .foregroundColor(.secondary.opacity(0.5))
                 .padding(.leading, 8)
             
-            TextField("Search", text: $searchText)
+            TextField("Search", text: $viewModel.searchText)
                 .background(Color.init(uiColor: .systemGray6))
                 .font(.system(size: 17, weight: .regular))
                 .frame(height: 38)

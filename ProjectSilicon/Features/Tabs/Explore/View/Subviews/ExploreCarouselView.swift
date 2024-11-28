@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ExploreCarouselView: View {
-    @ObservedObject var viewModel: ExploreViewModel
+    @EnvironmentObject var viewModel: ExploreViewModel
 
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
