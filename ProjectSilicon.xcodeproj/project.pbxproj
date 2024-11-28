@@ -17,7 +17,7 @@
 		3DA793892BC1AAAF00F5057C /* ExploreCategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA793882BC1AAAF00F5057C /* ExploreCategoriesView.swift */; };
 		3DA7938B2BC1AB9200F5057C /* LandmarkListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA7938A2BC1AB9200F5057C /* LandmarkListCellView.swift */; };
 		3DC0D1F62CF2534A00C85EC7 /* StarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC0D1F52CF2534100C85EC7 /* StarsView.swift */; };
-		3DC0D1F82CF5219B00C85EC7 /* LandmarkCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC0D1F72CF5219B00C85EC7 /* LandmarkCategoryView.swift */; };
+		3DC0D1F82CF5219B00C85EC7 /* CategoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC0D1F72CF5219B00C85EC7 /* CategoryDetailView.swift */; };
 		3DE5DEAA2BBC822400C75087 /* ProjectSiliconApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE5DEA92BBC822400C75087 /* ProjectSiliconApp.swift */; };
 		3DE5DEAC2BBC822400C75087 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE5DEAB2BBC822400C75087 /* MapView.swift */; };
 		3DE5DEAE2BBC822500C75087 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DE5DEAD2BBC822500C75087 /* Assets.xcassets */; };
@@ -37,7 +37,7 @@
 		3DA793882BC1AAAF00F5057C /* ExploreCategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreCategoriesView.swift; sourceTree = "<group>"; };
 		3DA7938A2BC1AB9200F5057C /* LandmarkListCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkListCellView.swift; sourceTree = "<group>"; };
 		3DC0D1F52CF2534100C85EC7 /* StarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarsView.swift; sourceTree = "<group>"; };
-		3DC0D1F72CF5219B00C85EC7 /* LandmarkCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkCategoryView.swift; sourceTree = "<group>"; };
+		3DC0D1F72CF5219B00C85EC7 /* CategoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailView.swift; sourceTree = "<group>"; };
 		3DE5DEA62BBC822400C75087 /* ProjectSilicon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectSilicon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DE5DEA92BBC822400C75087 /* ProjectSiliconApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSiliconApp.swift; sourceTree = "<group>"; };
 		3DE5DEAB2BBC822400C75087 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -135,7 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				3DE5DEBB2BBCE77200C75087 /* ExploreView.swift */,
-				3DC0D1F72CF5219B00C85EC7 /* LandmarkCategoryView.swift */,
+				3DC0D1F72CF5219B00C85EC7 /* CategoryDetailView.swift */,
 				3D963CA82BC389A300927C73 /* Subviews */,
 			);
 			path = View;
@@ -257,7 +257,7 @@
 				3DE5DEAA2BBC822400C75087 /* ProjectSiliconApp.swift in Sources */,
 				3DC0D1F62CF2534A00C85EC7 /* StarsView.swift in Sources */,
 				3D963CAA2BC389C700927C73 /* ExploreSearchBarView.swift in Sources */,
-				3DC0D1F82CF5219B00C85EC7 /* LandmarkCategoryView.swift in Sources */,
+				3DC0D1F82CF5219B00C85EC7 /* CategoryDetailView.swift in Sources */,
 				3DA7937B2BBF186100F5057C /* LandmarkDetailView.swift in Sources */,
 				3DE5DEB82BBCAB6A00C75087 /* Landmark.swift in Sources */,
 				3D963CA62BC3796D00927C73 /* ExploreViewModel.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  CategoryView.swift
+//  CategoryDetailView.swift
 //  ProjectSilicon
 //
 //  Created by Caio França on 25/11/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LandmarkCategoryView: View {
+struct CategoryDetailView: View {
     let category: LandmarkCategory
     @ObservedObject var viewModel: ExploreViewModel
     
@@ -21,29 +21,34 @@ struct LandmarkCategoryView: View {
                     .padding(.vertical, 32)
                     .padding(.horizontal, 16)
                 
-                VStack(content: {
-                    Spacer()
-                        .frame(height: 24)
+                ZStack(alignment: .bottom, content: {
                     
-                    ScrollView(content: {
-                        VStack(spacing: 24) {
-                            let landmarks = viewModel.landmarks
-                            
-                            ForEach(landmarks, id: \.self) { landmark in
-                                Button(action: {
-                                    viewModel.navigationPath.append(landmark)
-                                }) {
-                                    LandmarkListCellView(screenSize: geometry.size, landmark: landmark)
+                    Color.init(.systemBackground)
+                        .frame(height: 50)
+                    
+                    VStack(content: {
+                        Spacer()
+                            .frame(height: 24)
+                        
+                        ScrollView(content: {
+                            VStack(spacing: 24) {
+                                let landmarks = viewModel.landmarks.filter { $0.category == category }
+                                
+                                ForEach(landmarks, id: \.self) { landmark in
+                                    Button(action: {
+                                        viewModel.navigationPath.append(landmark)
+                                    }) {
+                                        LandmarkListCellView(screenSize: geometry.size, landmark: landmark)
+                                    }
                                 }
                             }
-                        }
-                        .background(Color.init(uiColor: .systemBackground))
+                            .background(Color.init(uiColor: .systemBackground))
+                        })
+                        
                     })
-                    
+                    .background(Color.init(uiColor: .systemBackground))
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
                 })
-                .background(Color.init(uiColor: .systemBackground))
-                .clipShape(RoundedRectangle(cornerRadius: 20))
-                .ignoresSafeArea()
             })
             .background(category.tintColor)
             .onAppear(perform: viewModel.loadLandmarks)
@@ -53,7 +58,7 @@ struct LandmarkCategoryView: View {
 
 #Preview {
     NavigationStack(root: {
-        LandmarkCategoryView(category: LandmarkCategory.nature, viewModel: ExploreViewModel())
+        CategoryDetailView(category: LandmarkCategory.nature, viewModel: ExploreViewModel())
     })
 }
 

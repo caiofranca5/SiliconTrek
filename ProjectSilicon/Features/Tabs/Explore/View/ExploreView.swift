@@ -92,7 +92,7 @@ struct ExploreView: View {
                     }
                     .navigationDestination(for: LandmarkCategory.self) { category in
                         LandmarkCategoryWrapper(
-                            content: LandmarkCategoryView(category: category, viewModel: viewModel),
+                            content: CategoryDetailView(category: category, viewModel: viewModel),
                             backButtonColor: .white, navbarBackgroundColor: UIColor.init(category.tintColor)
                         )
                     }
