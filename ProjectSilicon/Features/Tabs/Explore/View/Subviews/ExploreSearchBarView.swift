@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct ExploreSearchBarView: View {
-    
-    @EnvironmentObject var viewModel: ExploreViewModel
+    @Environment(ExploreViewModel.self) private var viewModel
     
     var body: some View {
+        
+        @Bindable var viewModel = viewModel
+        
         HStack(spacing: 8, content: {
             Image(systemName: "magnifyingglass")
                 .font(.system(size: 17, weight: .regular))

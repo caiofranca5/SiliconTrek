@@ -9,7 +9,7 @@ import SwiftUI
 import MapKit
 
 struct LandmarkDetailView: View {
-    @EnvironmentObject var viewModel: ExploreViewModel
+    @Environment(ExploreViewModel.self) private var viewModel
     let landmark: Landmark
     @State var isRedacted: Bool = false
     

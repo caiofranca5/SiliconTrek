@@ -7,12 +7,13 @@
 
 import SwiftUI
 
-class ExploreViewModel: ObservableObject {
+@Observable
+class ExploreViewModel {
     
-    @Published var navigationPath = NavigationPath()
-    @Published var searchText: String = ""
-    @Published var errorMessage: String?
-    @Published var landmarks: [Landmark] = []
+    var navigationPath = NavigationPath()
+    var searchText: String = ""
+    var errorMessage: String?
+    var landmarks: [Landmark] = []
     
     let homeCategories: [LandmarkCategory] = [.tech, .nature, .history, .education, .sports, .shopping, .dining, .recreation]
 

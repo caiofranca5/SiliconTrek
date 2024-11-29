@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CategoryDetailView: View {
-    @EnvironmentObject var viewModel: ExploreViewModel
+    @Environment(ExploreViewModel.self) private var viewModel
     let category: LandmarkCategory
     
     var body: some View {
@@ -59,6 +59,7 @@ struct CategoryDetailView: View {
 #Preview {
     NavigationStack(root: {
         CategoryDetailView(category: LandmarkCategory.nature)
+            .environment(ExploreViewModel())
     })
 }
 

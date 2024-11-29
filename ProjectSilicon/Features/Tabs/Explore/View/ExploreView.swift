@@ -9,9 +9,10 @@ import SwiftUI
 
 struct ExploreView: View {
     
-    @StateObject var viewModel = ExploreViewModel()
+    var viewModel = ExploreViewModel()
     
     var body: some View {
+        @Bindable var viewModel = viewModel
         NavigationStack(path: $viewModel.navigationPath, root: {
             GeometryReader(content: { geometry in
                 ScrollView(content: {
@@ -101,10 +102,11 @@ struct ExploreView: View {
                 })
             })
         })
-        .environmentObject(viewModel)
+        .environment(viewModel)
     }
 }
 
 #Preview {
     ContentView()
+        .environment(ExploreViewModel())
 }
