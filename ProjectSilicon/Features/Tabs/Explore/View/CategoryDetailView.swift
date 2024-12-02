@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CategoryDetailView: View {
+    @Environment(\.dismiss) var dismiss
     @Environment(ExploreViewModel.self) private var viewModel
     let category: LandmarkCategory
     
@@ -24,7 +25,8 @@ struct CategoryDetailView: View {
                 ZStack(alignment: .bottom, content: {
                     
                     Color.init(.systemBackground)
-                        .frame(height: 50)
+                        .frame(height: 150)
+                        .offset(y: +100)
                     
                     VStack(content: {
                         Spacer()
@@ -50,6 +52,23 @@ struct CategoryDetailView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 20))
                 })
             })
+            .navigationBarBackButtonHidden()
+            .toolbar(content: {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        HStack(spacing: 6) {
+                            Image(systemName: "chevron.left")
+                                .font(.system(size: 17, weight: .semibold))
+                            Text("Back")
+                                .font(.system(size: 17, weight: .regular))
+                                .padding(.trailing, 32)
+                        }
+                    }
+                }
+            })
+            .tint(.white)
             .background(category.tintColor)
             .onAppear(perform: viewModel.loadLandmarks)
         })
@@ -63,55 +82,13 @@ struct CategoryDetailView: View {
     })
 }
 
-class LandmarkCategoryHostingController<Content: View>: UIHostingController<Content> {
-    var backButtonColor: UIColor?
-    var navbarBackgroundColor: UIColor?
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if let navigationBar = navigationController?.navigationBar, let color = backButtonColor {
-
-            // Ensure navigation bar style persists during scrolls
-            let appearance = UINavigationBarAppearance()
-            appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = navbarBackgroundColor
-            appearance.shadowColor = nil
-            navigationBar.tintColor = color
-            navigationBar.standardAppearance = appearance
-            navigationBar.scrollEdgeAppearance = appearance
-
-        }
+extension UINavigationController: @retroactive UIGestureRecognizerDelegate {
+    override open func viewDidLoad() {
+        super.viewDidLoad()
+        interactivePopGestureRecognizer?.delegate = self
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        if let navigationBar = navigationController?.navigationBar {
-            let appearance = UINavigationBarAppearance()
-            appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = .systemBackground
-            navigationBar.tintColor = .accent
-            appearance.shadowColor = nil
-            navigationBar.standardAppearance = appearance
-            navigationBar.scrollEdgeAppearance = appearance
-        }
-    }
-}
-
-struct LandmarkCategoryWrapper<Content: View>: UIViewControllerRepresentable {
-    var content: Content
-    var backButtonColor: UIColor
-    var navbarBackgroundColor: UIColor
-
-    func makeUIViewController(context: Context) -> LandmarkCategoryHostingController<Content> {
-        let hostingController = LandmarkCategoryHostingController(rootView: content)
-        hostingController.backButtonColor = backButtonColor
-        hostingController.navbarBackgroundColor = navbarBackgroundColor
-        return hostingController
-    }
-
-    func updateUIViewController(_ uiViewController: LandmarkCategoryHostingController<Content>, context: Context) {
-        uiViewController.rootView = content
-        uiViewController.backButtonColor = backButtonColor
-        uiViewController.navbarBackgroundColor = navbarBackgroundColor
+    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return viewControllers.count > 1
     }
 }
