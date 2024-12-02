@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ExploreCategoriesView: View {
-    @ObservedObject var viewModel: ExploreViewModel
+    @Environment(ExploreViewModel.self) private var viewModel
     let categories: [LandmarkCategory]
     
     var body: some View {
@@ -16,8 +16,7 @@ struct ExploreCategoriesView: View {
             HStack(spacing: 24, content: {
                 ForEach(categories, id: \.self) { category in
                     Button(action: {
-                        viewModel.navigateToSearch(type: .category)
-                        viewModel.categoryFilter = category
+                        viewModel.navigationPath.append(category)
                     }, label: {
                         CategoryIconView(category: category)
                     })
@@ -25,7 +24,7 @@ struct ExploreCategoriesView: View {
                 
                 Spacer().frame(width: 24)
             })
-            .offset(x: 24)
+            .offset(x: 16)
         })
     }
 }
@@ -37,7 +36,7 @@ fileprivate struct CategoryIconView: View {
     var body: some View {
         VStack(content: {
             ZStack(content: {
-                RoundedRectangle(cornerRadius: 18)
+                RoundedRectangle(cornerRadius: 14)
                     .foregroundStyle(category.tintColor)
                     .frame(width: 60, height: 60)
                 

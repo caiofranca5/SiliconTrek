@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct ExploreSearchBarView: View {
-    @ObservedObject var viewModel: ExploreViewModel
+    @Environment(ExploreViewModel.self) private var viewModel
     
     var body: some View {
+        
+        @Bindable var viewModel = viewModel
+        
         HStack(spacing: 8, content: {
             Image(systemName: "magnifyingglass")
                 .font(.system(size: 17, weight: .regular))
@@ -22,9 +25,6 @@ struct ExploreSearchBarView: View {
                 .font(.system(size: 17, weight: .regular))
                 .frame(height: 38)
                 .submitLabel(.search)
-                .onSubmit {
-                    viewModel.navigateToSearch(type: .text)
-                }
             
         })
         .padding(8)

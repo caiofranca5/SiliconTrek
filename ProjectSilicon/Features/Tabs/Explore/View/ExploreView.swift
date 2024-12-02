@@ -9,106 +9,104 @@ import SwiftUI
 
 struct ExploreView: View {
     
-    @StateObject var viewModel = ExploreViewModel()
-
+    var viewModel = ExploreViewModel()
+    
     var body: some View {
-        NavigationStack(path: $viewModel.path, root: {
+        @Bindable var viewModel = viewModel
+        NavigationStack(path: $viewModel.navigationPath, root: {
             GeometryReader(content: { geometry in
                 ScrollView(content: {
                     VStack(spacing: 0, content: {
-                        ExploreSearchBarView(viewModel: viewModel)
-                        .padding(.bottom, 32)
-                        .padding(.horizontal, 16)
+                        Divider()
                         
-                        ExploreCategoriesView(viewModel: viewModel, categories: viewModel.homeCategories)
+                        ExploreSearchBarView()
+                            .padding(.top, 24)
+                            .padding(.bottom, 32)
+                            .padding(.horizontal, 16)
+                        
+                        ExploreCategoriesView(categories: viewModel.homeCategories)
                             .padding(.bottom, 32)
                         
-                        VStack(spacing: 0, content: {
+                        HStack(content: {
+                            Text("Editors' Choice")
+                                .foregroundStyle(Color.primary)
+                                .font(.system(size: 20, weight: .semibold))
                             
-                            HStack(content: {
-                                Text("Editors' Choice")
-                                    .foregroundStyle(Color.primary)
-                                    .font(.system(size: 20, weight: .semibold))
-                                
-                                Spacer()
-                                
-                                Button(action: {
-                                    viewModel.navigateToSearch(type: .all)
-                                }, label: {
-                                    Text("See All")
-                                        .foregroundStyle(Color.accentColor)
-                                        .font(.system(size: 17, weight: .medium))
-                                })
-                                
-                            })
-                            .padding(.top, 24)
-                            .padding(.bottom, 22)
-                            .padding(.horizontal, 16)
+                            Spacer()
                             
-                            ExploreCarouselView(landmarks: viewModel.loadLandmarks(), selectedLandmark: $viewModel.selectedLandmark)
-                                .padding(.bottom, 22)
-                            
-                            Divider()
-                                .padding(.horizontal, 16)
-                                .padding(.bottom, 24)
-                            
-                            HStack(content: {
-                                Text("Top Rated")
-                                    .foregroundStyle(Color.primary)
-                                    .font(.system(size: 20, weight: .semibold))
-                                
-                                Spacer()
-                                
-                                Button(action: {
-                                    viewModel.navigateToSearch(type: .all)
-                                }, label: {
-                                    Text("See All")
-                                        .font(.system(size: 17, weight: .medium))
-                                })
-                                
-                            })
-                            .padding(.horizontal, 16)
-                            .padding(.bottom, 24)
-                            
-                            VStack(spacing: 24, content: {
-                                ForEach(viewModel.loadLandmarks().prefix(2), id: \.self) { landmark in
-                                    Button(action: {
-                                        viewModel.selectedLandmark = landmark
-                                    }, label: {
-                                        LandmarkListCellView(screenSize: geometry.size, landmark: landmark)
-                                    })
-                                }
-                                
-                                Divider().opacity(0)
+                            Button(action: {
+                                //viewModel.navigateToSearch(type: .all)
+                            }, label: {
+                                Text("See All")
+                                    .foregroundStyle(Color.accentColor)
+                                    .font(.system(size: 17, weight: .medium))
                             })
                             
                         })
-                        .background(Color.init(uiColor: .systemGray6))
-                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                        .padding(.top, 8)
+                        .padding(.bottom, 24)
+                        .padding(.horizontal, 16)
+                        
+                        ExploreCarouselView()
+                        
+                        Divider()
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 24)
+                        
+                        HStack(content: {
+                            Text("Top Rated")
+                                .foregroundStyle(Color.primary)
+                                .font(.system(size: 20, weight: .semibold))
+                            
+                            Spacer()
+                            
+                            Button(action: {}, label: {
+                                Text("See All")
+                                    .font(.system(size: 17, weight: .medium))
+                            })
+                            
+                        })
+                        .padding(.horizontal, 16)
+                        .padding(.bottom, 24)
+                        
+                        VStack(spacing: 24, content: {
+                            let landmarks = viewModel.landmarks
+                            
+                            ForEach(landmarks, id: \.self) { landmark in
+                                Button(action: {
+                                    viewModel.navigationPath.append(landmark)
+                                }) {
+                                    LandmarkListCellView(screenSize: geometry.size, landmark: landmark)
+                                }
+                            }
+                        })
+                        
+                        Divider().opacity(0)
+                            .padding(16)
                         
                     })
-                    .padding(.top, 24)
                     .navigationTitle("Explore")
                     .navigationBarTitleDisplayMode(.large)
-                    .navigationDestination(for: SearchType.self) { destination in
-                        SearchView(exploreViewModel: viewModel, type: destination)
+                    .navigationDestination(for: Landmark.self) { landmark in
+                        LandmarkDetailView(landmark: landmark)
                     }
-                    .onAppear {
-                        viewModel.searchText = ""
+                    .navigationDestination(for: LandmarkCategory.self) { category in
+                        LandmarkCategoryWrapper(
+                            content: CategoryDetailView(category: category),
+                            backButtonColor: .white, navbarBackgroundColor: UIColor.init(category.tintColor)
+                        )
                     }
+                    .onAppear(perform: {
+                        viewModel.loadLandmarks()
+                    })
                 })
             })
         })
-        .sheet(item: $viewModel.selectedLandmark) { selected in
-            LandmarkDetailView(landmark: selected)
-                .presentationDetents([.large])
-                .presentationDragIndicator(.hidden)
-                .interactiveDismissDisabled()
-        }
-        
+        .environment(viewModel)
     }
 }
 
 #Preview {
     ContentView()
+        .environment(ExploreViewModel())
 }

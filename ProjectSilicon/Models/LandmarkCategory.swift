@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-enum LandmarkCategory: String, CaseIterable, Decodable {
+enum LandmarkCategory: String, CaseIterable, Decodable, Identifiable, Hashable {
     case education = "Edu"
     case history = "History"
     case tech = "Tech"
@@ -17,6 +17,27 @@ enum LandmarkCategory: String, CaseIterable, Decodable {
     case recreation = "Recreation"
     case shopping = "Shopping"
     case dining = "Dining"
+    
+    var id: Int {
+        switch self {
+        case .education:
+            return 1
+        case .history:
+            return 2
+        case .tech:
+            return 3
+        case .nature:
+            return 4
+        case .sports:
+            return 5
+        case .recreation:
+            return 6
+        case .shopping:
+            return 7
+        case .dining:
+            return 8
+        }
+    }
     
     var icon: String {
         switch self {

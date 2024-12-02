@@ -7,18 +7,17 @@
 
 import SwiftUI
 
-class ExploreViewModel: ObservableObject {
+@Observable
+class ExploreViewModel {
     
-    @Published var path = NavigationPath()
-    @Published var searchText = ""
-    @Published var categoryFilter: LandmarkCategory = .dining
-    @Published var cityFilter: LandmarkCity = .all
-    @Published var selectedLandmark: Landmark?
-    @Published var errorMessage: String?
+    var navigationPath = NavigationPath()
+    var searchText: String = ""
+    var errorMessage: String?
+    var landmarks: [Landmark] = []
     
     let homeCategories: [LandmarkCategory] = [.tech, .nature, .history, .education, .sports, .shopping, .dining, .recreation]
 
-    func loadLandmarks() -> [Landmark] {
+    func loadLandmarks(){
         do {
             guard let url = Bundle.main.url(forResource: "landmarks", withExtension: "json") else {
                 throw NSError(domain: "ExploreViewModel", code: 1, userInfo: [NSLocalizedDescriptionKey: "Landmarks data file not found."])
@@ -27,15 +26,9 @@ class ExploreViewModel: ObservableObject {
             let data = try Data(contentsOf: url)
             let decoder = JSONDecoder()
             let landmarks = try decoder.decode([Landmark].self, from: data)
-            return landmarks
+            self.landmarks = landmarks
         } catch {
             self.errorMessage = "Error loading landmarks: \(error.localizedDescription)"
-            return []
         }
     }
-    
-    func navigateToSearch(type: SearchType) {
-        path.append(type)
-    }
-    
 }
