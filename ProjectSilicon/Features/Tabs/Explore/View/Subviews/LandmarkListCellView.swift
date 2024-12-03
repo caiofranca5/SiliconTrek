@@ -61,7 +61,7 @@ struct LandmarkListCellView: View {
             })
         })
         .frame(height: abs(screenSize.width/3.35)/1.5)
-        .background(Color.init(uiColor: .systemBackground))
+        .background(Color(.siliconBackground))
         .padding(.horizontal, 16)
     }
 }

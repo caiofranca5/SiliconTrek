@@ -97,6 +97,7 @@ struct ExploreView: View {
                         viewModel.loadLandmarks()
                     })
                 })
+                .background(Color(.siliconBackground))
             })
         })
         .environment(viewModel)

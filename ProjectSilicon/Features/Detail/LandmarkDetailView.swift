@@ -10,28 +10,19 @@ import MapKit
 
 struct LandmarkDetailView: View {
     @Environment(ExploreViewModel.self) private var viewModel
-    let landmark: Landmark
+    @Environment(\.openURL) var openURL
     @State var isRedacted: Bool = false
-    
-    @State private var cameraPosition: MapCameraPosition = .region(
-        MKCoordinateRegion()
-    )
+    let landmark: Landmark
+   
     
     init(landmark: Landmark) {
         self.landmark = landmark
-        _cameraPosition = State(initialValue: .region(
-            MKCoordinateRegion(
-                center: CLLocationCoordinate2D(latitude: landmark.latitude, longitude: landmark.longitude),
-                span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-            )
-        ))
     }
     
     var body: some View {
         GeometryReader(content: { geometry in
             ScrollView(content: {
                 VStack(spacing: 0, content: {
-                    
                     Divider()
                         .padding(.bottom)
                     
@@ -58,13 +49,11 @@ struct LandmarkDetailView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal, 16)
                     
-                    Button(action: {
-                        viewModel.navigationPath.append(landmark.category)
-                    }, label: {
-                        Label("Start Navigation", systemImage: "location.fill")
+                    Button(action: {}, label: {
+                        Label("Add to My Journey", systemImage: "location.fill")
                             .font(.system(size: 17, weight: .semibold))
                             .frame(maxWidth: .infinity, alignment: .center)
-                            .padding(.vertical, 4)
+                            .padding(.vertical, 6)
                     })
                     .buttonStyle(.borderedProminent)
                     .clipShape(RoundedRectangle(cornerRadius: 12))
@@ -93,27 +82,73 @@ struct LandmarkDetailView: View {
                     Divider()
                         .padding(.horizontal, 16)
                     
-                    Text("Address")
-                        .foregroundStyle(Color.primary)
-                        .font(.system(size: 20, weight: .semibold))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(16)
+                    HStack(content: {
+                        Text("Address")
+                            .foregroundStyle(Color.primary)
+                            .font(.system(size: 20, weight: .semibold))
+                        
+                        Spacer()
+                        
+                        Button(action: {}, label: {
+                            Label("Get Directions", systemImage: "arrow.triangle.turn.up.right.circle")
+                                .font(.system(size: 17, weight: .medium))
+                        })
+                        
+                    })
+                    .padding(16)
                     
                     Text(landmark.address + ", \(landmark.city.rawValue)")
                         .foregroundStyle(Color.secondary)
                         .font(.system(size: 17, weight: .regular))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal, 16)
+                                        
+                    Divider()
+                        .padding(16)
                     
-//                    Map(position: $cameraPosition) {
-//                        Marker(landmark.name, coordinate: CLLocationCoordinate2D(latitude: landmark.latitude, longitude: landmark.longitude))
-//                    }
-//                    .frame(width: abs(geometry.size.width - 32), height: abs(geometry.size.width - 32)/2)
-//                    .clipShape(RoundedRectangle(cornerRadius: 10))
-//                    .padding(.vertical, 16)
+                    Text("Extra")
+                        .foregroundStyle(Color.primary)
+                        .font(.system(size: 20, weight: .semibold))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal, 16)
                     
+                    HStack(spacing: 16, content: {
+                        Button(action: {
+                            openURL(URL(string: landmark.name)!)
+                        }, label: {
+                            Label("Learn More", systemImage: "safari.fill")
+                                .font(.system(size: 17, weight: .medium))
+                                .frame(height: 28)
+                        })
+                        .buttonStyle(.bordered)
+                        
+                        Button(action: {
+                            openURL(URL(string: landmark.name)!)
+                        }, label: {
+                            Label("Review", systemImage: "star.bubble")
+                                .font(.system(size: 17, weight: .medium))
+                                .frame(height: 28)
+                        })
+                        .buttonStyle(.bordered)
+                        
+                        Menu {
+                        } label: {
+                            Label("Collections", systemImage: "folder.badge.plus")
+                                .font(.system(size: 17, weight: .medium))
+                                .symbolRenderingMode(.multicolor)
+                                .frame(height: 28)
+                                .labelStyle(.iconOnly)
+                        }
+                        .buttonStyle(.bordered)
+                        
+                        Spacer()
+                    })
+                    .padding(16)
+                    
+                    Spacer().frame(height: 8)
                 })
             })
+            .background(Color(.siliconBackground))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar(content: {
                 LandmarkDetailToolbar(landmark: landmark)
@@ -140,7 +175,7 @@ struct LandmarkDetailToolbar: ToolbarContent {
             Menu {
             } label: {
                 Image(systemName:"folder.badge.plus")
-                    //.symbolRenderingMode(.multicolor)
+                    .symbolRenderingMode(.multicolor)
             }
             
             ///Share

@@ -24,7 +24,7 @@ struct CategoryDetailView: View {
                 
                 ZStack(alignment: .bottom, content: {
                     
-                    Color.init(.systemBackground)
+                    Color(.siliconBackground)
                         .frame(height: 150)
                         .offset(y: +100)
                     
@@ -44,11 +44,11 @@ struct CategoryDetailView: View {
                                     }
                                 }
                             }
-                            .background(Color.init(uiColor: .systemBackground))
+                            .background(Color(.siliconBackground))
                         })
                         
                     })
-                    .background(Color.init(uiColor: .systemBackground))
+                    .background(Color(.siliconBackground))
                     .clipShape(RoundedRectangle(cornerRadius: 20))
                 })
             })
