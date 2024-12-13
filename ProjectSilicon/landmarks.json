@@ -8,7 +8,9 @@
         "city": "Palo Alto",
         "address": "450 Jane Stanford Way",
         "latitude": 37.42859,
-        "longitude": -122.17077
+        "longitude": -122.17077,
+        "description": "A world-renowned private research university, known for its academic prestige, picturesque campus, and pioneering contributions to innovation.",
+        "public": true
     },
     {
         "id": 19,
@@ -19,7 +21,9 @@
         "city": "Cupertino",
         "address": "1 Infinite Loop",
         "latitude": 37.331669,
-        "longitude": -122.030098
+        "longitude": -122.030098,
+        "description": "Apple’s classic corporate campus, known for its sleek architecture and role in Apple’s history and innovation.",
+        "public": false
     },
     {
         "id": 20,
@@ -30,7 +34,9 @@
         "city": "Cupertino",
         "address": "10600 North Tantau Avenue",
         "latitude": 37.332801,
-        "longitude": -122.005821
+        "longitude": -122.005821,
+        "description": "A visitor center for Apple’s futuristic Apple Park campus, featuring a café, store with exclusive merchandise, and a rooftop viewing deck.",
+        "public": true
     },
     {
         "id": 21,
@@ -41,7 +47,9 @@
         "city": "Mountain View",
         "address": "1600 Amphitheatre Parkway",
         "latitude": 37.422716,
-        "longitude": -122.084256
+        "longitude": -122.084256,
+        "description": "Google’s main headquarters, known for its innovative design, bike-friendly campus, and environment fostering creativity.",
+        "public": false
     },
     {
         "id": 17,
@@ -52,7 +60,9 @@
         "city": "Santa Clara",
         "address": "4900 Marie P DeBartolo Way",
         "latitude": 37.403158,
-        "longitude": -121.969831
+        "longitude": -121.969831,
+        "description": "Home to the San Francisco 49ers, this state-of-the-art stadium hosts football games, concerts, and large-scale events.",
+        "public": true
     },
     {
         "id": 22,
@@ -63,7 +73,9 @@
         "city": "Mountain View",
         "address": "100 Bay Vw Dr",
         "latitude": 37.6381,
-        "longitude": -122.04467
+        "longitude": -122.04467,
+        "description": "An expansion of Google’s office space featuring sustainable design, modern architecture, and energy-efficient structures.",
+        "public": false
     },
     {
         "id": 16,
@@ -74,7 +86,9 @@
         "city": "San Jose",
         "address": "377 Santana Row",
         "latitude": 37.320348,
-        "longitude": -121.949734
+        "longitude": -121.949734,
+        "description": "A stylish shopping and dining district with upscale boutiques, international restaurants, and a European-influenced streetscape.",
+        "public": true
     },
     {
         "id": 15,
@@ -85,7 +99,9 @@
         "city": "Santa Clara",
         "address": "4701 Great America Pkwy",
         "latitude": 37.395414,
-        "longitude": -121.972086
+        "longitude": -121.972086,
+        "description": "A popular amusement park offering roller coasters, family rides, shows, and a water park.",
+        "public": true
     },
     {
         "id": 12,
@@ -96,7 +112,9 @@
         "city": "Cupertino",
         "address": "22898 Prospect Rd",
         "latitude": 37.286019,
-        "longitude": -122.06073
+        "longitude": -122.06073,
+        "description": "A scenic open space preserve offering hiking and horseback riding trails, panoramic views, and a tranquil natural environment.",
+        "public": true
     },
     {
         "id": 13,
@@ -107,7 +125,9 @@
         "city": "Cupertino",
         "address": "13100 Montebello Rd",
         "latitude": 37.29406,
-        "longitude": -122.090463
+        "longitude": -122.090463,
+        "description": "An open space preserve known for its historic winery buildings, orchards, and well-maintained hiking trails.",
+        "public": true
     },
     {
         "id": 14,
@@ -118,7 +138,9 @@
         "city": "Mountain View",
         "address": "3070 N Shoreline Blvd",
         "latitude": 37.431457,
-        "longitude": -122.087113
+        "longitude": -122.087113,
+        "description": "A large waterfront park with walking and biking paths, a sailing lake, a golf course, and picnic areas.",
+        "public": true
     },
     {
         "id": 5,
@@ -129,7 +151,9 @@
         "city": "Palo Alto",
         "address": "367 Addison Ave",
         "latitude": 37.44303,
-        "longitude": -122.15466
+        "longitude": -122.15466,
+        "description": "The birthplace of Silicon Valley, where Hewlett-Packard got its start, symbolizing early tech entrepreneurship.",
+        "public": false
     },
     {
         "id": 6,
@@ -140,7 +164,9 @@
         "city": "San Jose",
         "address": "201 S Market St",
         "latitude": 37.331404,
-        "longitude": -121.890156
+        "longitude": -121.890156,
+        "description": "A hands-on science and technology museum in San Jose offering interactive exhibits and educational programs.",
+        "public": true
     },
     {
         "id": 7,
@@ -151,7 +177,9 @@
         "city": "San Jose",
         "address": "525 S Winchester Blvd",
         "latitude": 37.318293,
-        "longitude": -121.950988
+        "longitude": -121.950988,
+        "description": "A Victorian mansion famous for its architectural oddities and secret passages, now a popular tourist attraction.",
+        "public": true
     },
     {
         "id": 8,
@@ -162,7 +190,9 @@
         "city": "San Jose",
         "address": "1660 Park Ave",
         "latitude": 37.302688,
-        "longitude": -121.887413
+        "longitude": -121.887413,
+        "description": "A museum showcasing the largest collection of Egyptian artifacts on display in the western U.S.",
+        "public": true
     },
     {
         "id": 9,
@@ -173,7 +203,9 @@
         "city": "Mountain View",
         "address": "1401 N Shoreline Blvd",
         "latitude": 37.414293,
-        "longitude": -122.077448
+        "longitude": -122.077448,
+        "description": "A museum dedicated to the evolution of computing technology, showcasing rare artifacts and interactive exhibits.",
+        "public": true
     },
     {
         "id": 10,
@@ -184,7 +216,9 @@
         "city": "Los Altos",
         "address": "2066 Crist Drive",
         "latitude": 37.340091,
-        "longitude": -122.068832
+        "longitude": -122.068832,
+        "description": "The suburban garage where Steve Jobs and Steve Wozniak founded Apple, sparking a technological revolution.",
+        "public": false
     },
     {
         "id": 11,
@@ -195,7 +229,9 @@
         "city": "Santa Clara",
         "address": "2200 Mission College Blvd",
         "latitude": 37.388266,
-        "longitude": -121.963779
+        "longitude": -121.963779,
+        "description": "A museum chronicling the semiconductor industry and Intel’s contributions, featuring interactive and educational exhibits.",
+        "public": true
     },
     {
         "id": 4,
@@ -206,7 +242,9 @@
         "city": "Santa Clara",
         "address": "500 El Camino Real",
         "latitude": 37.348624,
-        "longitude": -121.936544
+        "longitude": -121.936544,
+        "description": "A private Jesuit university known for its academic excellence, historic campus, and mission-driven education.",
+        "public": true
     },
     {
         "id": 1,
@@ -217,7 +255,9 @@
         "city": "Cupertino",
         "address": "19401 Stevens Creek Blvd",
         "latitude": 37.32308,
-        "longitude": -122.01021
+        "longitude": -122.01021,
+        "description": "A vibrant mixed-use development offering a variety of restaurants, shops, and cafés, popular for dining and leisure.",
+        "public": true
     },
     {
         "id": 18,
@@ -228,7 +268,9 @@
         "city": "Menlo Park",
         "address": "1 Hacker Way",
         "latitude": 37.484928,
-        "longitude": -122.148201
+        "longitude": -122.148201,
+        "description": "Home to Meta (Facebook), known for its social media innovation and modern, collaborative office designs.",
+        "public": false
     },
     {
         "id": 2,
@@ -239,6 +281,8 @@
         "city": "San Jose",
         "address": "87 N San Pedro S",
         "latitude": 37.33652,
-        "longitude": -121.89432
+        "longitude": -121.89432,
+        "description": "A lively market in downtown San Jose with diverse food vendors, bars, live entertainment, and a historic ambiance.",
+        "public": true
     }
 ]

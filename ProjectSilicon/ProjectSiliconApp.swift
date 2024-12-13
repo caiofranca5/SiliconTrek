@@ -23,7 +23,7 @@ struct ContentView: View {
                 .tabItem { Label("Explore", systemImage: "magnifyingglass") }
             
             Text("Favorites")
-                .tabItem { Label("Favorites", systemImage: "bookmark") }
+                .tabItem { Label("Favorites", systemImage: "folder") }
             
             Text("You")
                 .tabItem { Label("You", systemImage: "person") }

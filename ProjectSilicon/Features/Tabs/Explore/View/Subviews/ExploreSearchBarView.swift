@@ -26,6 +26,17 @@ struct ExploreSearchBarView: View {
                 .frame(height: 38)
                 .submitLabel(.search)
             
+            Button(action: {
+                withAnimation(.easeInOut(duration: 0.3)) {}
+            }, label: {
+                Label("Go Back", systemImage: "xmark.circle")
+                    .labelStyle(.iconOnly)
+                    .font(.system(size: 17, weight: .semibold))
+                    .foregroundColor(.secondary.opacity(0.8))
+                    .padding(.trailing)
+            })
+            .hidden()
+            
         })
         .padding(8)
         .background(Color.init(uiColor: .systemGray6))

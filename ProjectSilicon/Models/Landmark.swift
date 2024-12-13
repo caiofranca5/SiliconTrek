@@ -18,8 +18,10 @@ struct Landmark: Decodable, Hashable, Identifiable {
     let address: String
     let latitude: Double
     let longitude: Double
+    let description: String
+    let isPublic: Bool
 
-    enum CodingKeys: CodingKey {
+    enum CodingKeys: String, CodingKey {
         case id
         case name
         case category
@@ -28,6 +30,8 @@ struct Landmark: Decodable, Hashable, Identifiable {
         case address
         case latitude
         case longitude
+        case description
+        case isPublic = "public"
     }
     
     var coordinate: CLLocationCoordinate2D {

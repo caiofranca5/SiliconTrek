@@ -68,14 +68,14 @@ struct LandmarkDetailView: View {
                         
                         Text("•")
                         
-                        Text("Private")
+                        Text(landmark.isPublic ? "Open to Visitors" : "Exterior View Only")
                     }
                     .foregroundColor(.secondary)
                     .font(.system(size: 15, weight: .semibold))
                     
-                    Text("The Apple Campus is the former corporate headquarters of Apple Inc. from 1993 until 2017. In April 2017, it was largely replaced by Apple Park (aka Apple Campus 2), but is still an Apple office and lab space.")
+                    Text(landmark.description)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .font(.system(size: 15, weight: .regular))
+                        .font(.system(size: 17, weight: .regular))
                         .foregroundColor(.primary)
                         .padding(16)
                     
@@ -160,7 +160,7 @@ struct LandmarkDetailView: View {
 
 #Preview {
     NavigationStack(root: {
-        LandmarkDetailView(landmark: Landmark(id: 1, name: "Apple Infinite Loop", category: .tech, image: "211d33ce-fd6d-4879-070f-37bf77b9ab00", city: .cupertino, address: "1 Infinite Loop", latitude: 37.331669, longitude: -122.030098))
+        LandmarkDetailView(landmark: Landmark(id: 1, name: "Apple Infinite Loop", category: .tech, image: "211d33ce-fd6d-4879-070f-37bf77b9ab00", city: .cupertino, address: "1 Infinite Loop", latitude: 37.331669, longitude: -122.030098, description: "Apple’s classic corporate campus, a centerpiece of Silicon Valley’s tech landscape, known for its sleek architecture and proximity to Apple’s history and innovation.", isPublic: true))
             .environment(ExploreViewModel())
     })
 }

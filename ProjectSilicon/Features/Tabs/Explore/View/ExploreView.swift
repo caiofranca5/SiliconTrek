@@ -70,7 +70,7 @@ struct ExploreView: View {
                         .padding(.bottom, 24)
                         
                         VStack(spacing: 24, content: {
-                            let landmarks = viewModel.landmarks
+                            let landmarks = viewModel.landmarks.prefix(3)
                             
                             ForEach(landmarks, id: \.self) { landmark in
                                 Button(action: {
